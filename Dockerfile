@@ -14,7 +14,7 @@ RUN git clone https://github.com/ArchipelagoMW/Archipelago.git /archipelago
 WORKDIR /archipelago
 RUN git checkout ${AP_REF}
 
-# create venv
+# create venv (required by AP)
 RUN python -m venv ./.venv && . .venv/bin/activate
 
 # install deps
