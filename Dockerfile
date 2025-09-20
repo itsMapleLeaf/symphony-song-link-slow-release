@@ -20,8 +20,11 @@ RUN python ModuleUpdate.py --yes
 # copy custom data
 COPY ./archipelago .
 
-ARG LAUNCHER_ARGS="\'Text Client' -- --nogui"
+ARG LAUNCHER_COMPONENT="Text Client"
+ENV LAUNCHER_COMPONENT=${LAUNCHER_COMPONENT}
+
+ARG LAUNCHER_ARGS=""
 ENV LAUNCHER_ARGS=${LAUNCHER_ARGS}
 
 # invoke /bin/sh for correct env var expansion
-CMD ["/bin/sh", "-c", "python Launcher.py ${LAUNCHER_ARGS}"]
+CMD ["/bin/sh", "-c", "python Launcher.py \"${LAUNCHER_COMPONENT}\" -- --nogui ${LAUNCHER_ARGS}"]
