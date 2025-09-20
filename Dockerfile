@@ -6,8 +6,8 @@ FROM python:3.13
 # so for now, use this ref on main
 ARG AP_REF=73718bbd618651d1f75da8382944173cc6295448
 
-ARG SLOW_RELEASE_TIME=0
-ENV SLOW_RELEASE_TIME=${SLOW_RELEASE_TIME}
+ARG LAUNCHER_ARGS="\'Text Client' -- --nogui"
+ENV LAUNCHER_ARGS=${LAUNCHER_ARGS}
 
 # clone archipelago
 RUN git clone https://github.com/ArchipelagoMW/Archipelago.git /archipelago
@@ -24,4 +24,4 @@ RUN python ModuleUpdate.py --yes
 COPY ./archipelago .
 
 # invoke /bin/sh for correct env var expansion
-CMD ["/bin/sh", "-c", "python Launcher.py 'Slow Release Client' -- --nogui --name SongLink --connect archipelago.gg:50299 --time ${SLOW_RELEASE_TIME}"]
+CMD ["/bin/sh", "-c", "python Launcher.py ${LAUNCHER_ARGS}"]
